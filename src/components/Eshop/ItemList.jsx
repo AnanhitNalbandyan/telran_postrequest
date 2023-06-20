@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Item } from './Item'
 import { AddItem } from './AddItem'
 import classes from './itemList.module.css'
+import { postItem } from '../../requests'
 
 export const ItemList = () => {
   const [items, setItems] = useState([])
@@ -26,7 +27,8 @@ export const ItemList = () => {
   }, [])
 
   const handlePostedData = async (obj) => {
-    setItems([...items, obj])
+    const responseItem = await postItem(obj)
+    setItems([...items, responseItem])
   }
 
   return (
