@@ -1,9 +1,12 @@
-import { useContext } from 'react'
+import { useContext} from 'react'
 import { Item } from './Item'
 import classes from './itemList.module.css'
+import { useEffect } from 'react'
+
 
 export const ItemList = () => {
-
+  
+  const {setIsLoading, setItems, setError, items } = useContext(ApiContext)
   useEffect(() => {
     const getdata = async () => {
       setIsLoading(true)
