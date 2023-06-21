@@ -7,6 +7,8 @@ import { useState,useEffect } from 'react'
 
 import { AddItem } from './components/Eshop/AddItem'
 import { postItem, deleteItem } from './request'
+import { Timer } from './components/Timer/Inex'
+import { ToggleTheme } from './components/Eshop/ToggleTheme'
 
 import classes from './app.module.css'
 import axios from 'axios'
@@ -16,6 +18,9 @@ function App() {
   const [items, setItems]= useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [theme, setTheme]= useState('light')
+
+
   useEffect(() => {
     const getdata = async () => {
       setIsLoading(true)
@@ -46,11 +51,17 @@ function App() {
       : console.log('error')
   }
 
+  const toggleTheme = ()=>{
+    setTheme(prevTheme =>(prevTheme === 'light' ? 'dark' : 'light'))
+  }
+
   return (
   
-    <ApiContext.Provider value={{items, handlePostedData, handleDeleteItem}}>
+    <ApiContext.Provider value={{items, handlePostedData, handleDeleteItem, setIsLoading, setError, toggleTheme }}>
 
       <div className="App">
+        <Timer/>
+        <ToggleTheme />
       <div className={classes.addItemContainer}>
         <AddItem/>
       </div>

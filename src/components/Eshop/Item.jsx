@@ -6,6 +6,7 @@ export const Item = ({ id, title, price, image, description }) => {
   
   const {handleDeleteItem } = useContext(ApiContext)
   
+
   return (
     <div className={classes.item}>
       <h1>{title}</h1>

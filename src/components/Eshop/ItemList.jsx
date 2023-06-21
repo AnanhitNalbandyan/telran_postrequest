@@ -1,28 +1,14 @@
 import { useContext} from 'react'
 import { Item } from './Item'
 import classes from './itemList.module.css'
-import { useEffect } from 'react'
+
+import {ApiContext} from '../context'
 
 
 export const ItemList = () => {
   
-  const {setIsLoading, setItems, setError, items } = useContext(ApiContext)
-  useEffect(() => {
-    const getdata = async () => {
-      setIsLoading(true)
-      try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products?limit=7&offset=1')
-        const data = await response.json()
-        setItems(data)
-        setIsLoading(false)
-      } catch (error) {
-        console.error('Error:', error)
-        setError(error)
-        setIsLoading(false)
-      }
-    }
-    getdata()
-  }, [])
+  const {setItems, items } = useContext(ApiContext)
+  
 
   const handlePostedData = async (obj) => {
     setItems([...items, obj])
