@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { ApiContext } from '../context'
 import classes from './addItem.module.css'
 
 export const AddItem = ({ addNewProduct }) => {
+  const {handlePostedData}= useContext(ApiContext)
   const [product, setProduct] = useState({
     id: new Date(),
     title: '',
@@ -13,7 +15,7 @@ export const AddItem = ({ addNewProduct }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addNewProduct(product)
+    handlePostedData(product)
     setProduct({
       id: new Date(),
       title: '',
